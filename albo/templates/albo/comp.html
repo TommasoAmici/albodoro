@@ -1,0 +1,77 @@
+{% extends 'albo/base.html' %} {% load static %} {% block content %}
+<div class="main-content container offset-all-2">
+    <div class="row">
+        <div class="col-2">
+            {% if 'Serie A' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/seriea.png' %}"> {% elif 'Coppa delle Coppe' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/coppacoppe.png' %}"> {% elif 'Europa League' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/europa.png' %}"> {% elif 'Champions League' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/champions.png' %}"> {% elif 'La Liga' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/laliga.png' %}"> {% elif 'FA Cup' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/facup.png' %}"> {% elif 'Premier League' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/premier.png' %}"> {% elif 'Copa del Rey' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/copadelrey.png' %}"> {% elif 'Coppa Italia' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/coppaitalia.png' %}"> {% elif 'Ekstraklasa' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/ekstra.png' %}"> {% elif 'Intertoto' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/intertoto.png' %}"> {% elif 'Supercoppa' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/supercup.png' %}"> {% elif 'Papa' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/papajohns.png' %}"> {% endif %}
+        </div>
+        <div class="col-4">
+            <h1> {{ comp }} </h1>
+            <h4> {{ comp.date.year }} </h4>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-4">
+            <h1>Vincitore</h1>
+            <div class="media">
+                <img src="{% static '/images/'|add:comp.winner.logo %}" alt="Logo {{ comp.winner.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
+                    onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+
+                <div class="media-body">
+                    <h4 class="mt-0">
+                        <a href="{% url 'squadra' pk=comp.winner.pk %}">{{ comp.winner.name }}</a>
+                    </h4>
+                    <h5>{{ comp.winner.owner }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table offset-all">
+        <thead>
+            <th scope="col">Giornata</th>
+            <th scope='col'>Squadra di casa</th>
+            <th scope='col' class="text-center">Risultato</th>
+            <th scope='col'>Squadra fuori casa</th>
+        </thead>
+        <tbody>
+            
+            {% for game in games %}
+            <!--
+            {% ifchanged game.matchday %}
+            <tr class="blank_row">
+                <td colspan="4"></td>
+            </tr>
+            {% endifchanged %}
+            -->
+            <tr class='game'>
+                <th scope='row'>{{ game.matchday }}</th>
+                {% for t in game.teams.all %} {% if t.home %}
+                <td>
+                    <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
+                </td>
+                {% endif %} {% endfor %}
+                <td class='text-center'>{% for t in game.teams.all %}{{t.goals}}{% if forloop.first %} - {% endif %}{% endfor %}</td>
+                {% for t in game.teams.all %} {% if t.home == 0 %}
+                <td>
+                    <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
+                </td>
+                {% endif %} {% endfor %}
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

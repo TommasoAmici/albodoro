@@ -1,0 +1,35 @@
+{% extends 'albo/base.html' %} {% load static %} {% block content %}
+<div class="main-content row timeline-body">
+    <nav class="timeline__nav col-3 nav nav-pills" id="navbar-timeline">
+        <ul>
+            {% for trophy in trophies %} {% ifchanged trophy.date.year %}
+            <li class="nav-item">
+                <a class="nav-link" href="#{{ trophy.date.year }}">{{ trophy.date.year }}</a>
+            </li>
+            {% endifchanged %} {% endfor %}
+        </ul>
+    </nav>
+    <div class="col-1"></div>
+    <div class="timeline__section offset-all col-8">
+
+        {% for trophy in trophies %}
+        {% if trophy.winner %}
+        <div class="media team milestone {% ifchanged trophy.date.year %} new-year {% endifchanged %}" {% ifchanged trophy.date.year %} id="{{ trophy.date.year }}" {% endifchanged %}>
+            <img src="{% static '/images/'|add:trophy.winner.logo %}" alt="Logo {{ trophy.winner.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
+                onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+            <div class="media-body">
+                <h4 class="mt-0">
+                    <a href="{% url 'squadra' pk=trophy.winner.pk %}">{{ trophy.winner.name }}</a>
+                </h4>
+                <h5>
+                    <a href="{% url 'competizione' pk=trophy.pk %}"> {{ trophy.name }} </a>
+                </h5>
+            </div>
+        </div>
+        {% else %}
+        {% endif %}
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

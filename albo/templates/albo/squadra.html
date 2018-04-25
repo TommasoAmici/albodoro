@@ -1,0 +1,75 @@
+{% extends 'albo/base.html' %} {% load static %} {% block content %}
+<div class="container main-content offset-all">
+    <div class="row">
+        <div class="team col-4">
+                <img src="{% static '/images/'|add:team.logo %}" alt="Logo {{ team.name }}" class="img-fluid rounded-circle team-logo" onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+        </div>
+        <div class="col-8">
+            <div class="">
+                <h4>
+                    <a href="{% url 'squadra' pk=team.pk %}">{{ team.name }}</a>
+                </h4>
+                <h5>{{ team.owner }}</h5>
+            </div>
+            <p>
+                {{ team.history }}
+            </p>
+            {% for trophy in trophies %}
+            <a href={% url 'competizione' pk=trophy.pk %}>
+            <img class='trophy'     
+            {% if 'Serie A' in trophy.name%}
+                src="{% static '/images/trophies/seriea.png' %}"
+                {% elif 'Coppa delle Coppe' in trophy.name%}
+                src="{% static '/images/trophies/coppacoppe.png' %}"
+                {% elif 'Europa League' in trophy.name%}
+                src="{% static '/images/trophies/europa.png' %}"
+                {% elif 'Champions League' in trophy.name%}
+                src="{% static '/images/trophies/champions.png' %}"
+                {% elif 'La Liga' in trophy.name%}
+                src="{% static '/images/trophies/laliga.png' %}"
+                {% elif 'FA Cup' in trophy.name%}
+                src="{% static '/images/trophies/facup.png' %}"
+                {% elif 'Premier League' in trophy.name%}
+                src="{% static '/images/trophies/premier.png' %}"
+                {% elif 'Copa del Rey' in trophy.name%}
+                src="{% static '/images/trophies/copadelrey.png' %}"
+                {% elif 'Coppa Italia' in trophy.name%}
+                src="{% static '/images/trophies/coppaitalia.png' %}"
+                {% elif 'Ekstraklasa' in trophy.name%}
+                src="{% static '/images/trophies/ekstra.png' %}"
+                {% elif 'Intertoto' in trophy.name%}
+                src="{% static '/images/trophies/intertoto.png' %}"
+                {% elif 'Supercoppa' in trophy.name%}
+                src="{% static '/images/trophies/supercup.png' %}"
+                {% elif 'Papa' in trophy.name%}
+                src="{% static '/images/trophies/papajohns.png' %}"
+                {% endif %}
+                ></a>
+            {% endfor %}
+        </div>
+    </div>
+    <table class="table roster">
+        <thead>
+            <tr>
+                <th scope="col">Ruolo</th>
+                <th scope="col">Giocatore</th>
+                <th scope="col">Squadra</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in players %}
+            <tr>
+                <th scope="row">
+                    {% for r in player.roles.all %}
+                    <span class="role {{ r }}">{{ r }} </span>
+                    {% endfor %}
+                </th>
+                <td>{{ player.name|title }}</td>
+                <td>{{ player.teamirl|title }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

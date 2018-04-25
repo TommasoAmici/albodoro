@@ -1,0 +1,18 @@
+{% extends 'albo/base.html' %} {% load static %} {% block content %}
+<div class="main-content offset-all">
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "fitWidth": "true" }'>
+        {% for team in teams %}
+        <div class="media team grid-item">
+            <img src="{% static '/images/'|add:team.logo %}" alt="Logo {{ team.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
+                onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+            <div class="media-body">
+                <h4 class="mt-0">
+                    <a href="{% url 'squadra' pk=team.pk %}">{{ team.name }}</a>
+                </h4>
+                <h5>{{ team.owner }}</h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

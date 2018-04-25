@@ -1,0 +1,110 @@
+.team-logo {
+    max-width: 200px
+}
+
+.team-logo-rose {
+    max-width: 50px;
+}
+
+.main-content {
+    padding-top: 20px
+}
+
+.grid-item {
+    width: 300px;
+    padding: 7px;
+    margin-top: 25px;
+}
+
+.grid {
+    margin: 0 auto;
+}
+
+.roster {
+    margin-top: 15px
+}
+
+.role {
+    min-width: 20px !important;
+    padding: 0 4px !important;
+    color: #FFF;
+    text-align: center;
+    margin: 1px;
+}
+
+.A,
+.Pc {
+    background-color: #aa0a1c;
+}
+
+.T,
+.W {
+    background-color: #9166ff;
+}
+
+.Dc,
+.Dd,
+.Ds {
+    background-color: #007c09;
+}
+
+.Por {
+    background-color: #fc961e;
+}
+
+.M,
+.E,
+.C {
+    background-color: #1d8dc0;
+}
+
+.trophy {
+    max-height: 30px;
+}
+
+.milestone {
+    margin-top: 6%;
+}
+
+.milestone.new-year {
+    padding-top: 12%;
+}
+
+.timeline__nav {
+    transition: top .3s ease-out;
+    position: fixed;
+    margin-top: 250px;
+    left: 0;
+}
+
+.timeline__nav ul {
+    list-style: none;
+    list-style-position: inside;
+}
+.timeline__section {
+    margin-bottom: 50px;
+}
+.timeline-body {
+    position: relative;
+  }
+.offset-all {
+    margin-top: 50px;
+}
+
+.offset-all-2 {
+    margin-top: 80px;
+}
+
+.comp-trophy {
+    max-height: 160px;
+}
+.game {
+    width: 300px;
+}
+.game-text {
+    width: 300px;
+    word-wrap: break-word;}
+    .blank_row
+    {
+        height: 10px !important; /* overwrites any other rules */
+        }
