@@ -1,10 +1,10 @@
 {% extends 'albo/base.html' %} {% load static %} {% block content %}
 <div class="container main-content offset-all">
     <div class="row">
-        <div class="team col-4">
+        <div class="team col-md-4 col-sm-12 text-center text-md-left">
                 <img src="{% static '/images/'|add:team.logo %}" alt="Logo {{ team.name }}" class="img-fluid rounded-circle team-logo" onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
         </div>
-        <div class="col-8">
+        <div class="col-md-8 col-sm-12 text-center text-md-left squadra">
             <div class="">
                 <h4>
                     <a href="{% url 'squadra' pk=team.pk %}">{{ team.name }}</a>
@@ -44,11 +44,11 @@
                 {% elif 'Papa' in trophy.name%}
                 src="{% static '/images/trophies/papajohns.png' %}"
                 {% endif %}
-                ></a>
+                data-toggle="tooltip" data-placement="bottom" title="{{ trophy.name }}"></a>
             {% endfor %}
         </div>
     </div>
-    <table class="table roster">
+    <table class="table roster table-hover">
         <thead>
             <tr>
                 <th scope="col">Ruolo</th>
@@ -70,6 +70,5 @@
             {% endfor %}
         </tbody>
     </table>
-
 </div>
 {% endblock %}

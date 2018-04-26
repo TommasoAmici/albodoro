@@ -1,6 +1,6 @@
 {% extends 'albo/base.html' %} {% load static %} {% block content %}
 <div class="main-content row timeline-body">
-    <nav class="timeline__nav col-3 nav nav-pills" id="navbar-timeline">
+    <nav class="timeline__nav col-md-3 d-none d-md-flex nav nav-pills" id="navbar-timeline">
         <ul>
             {% for trophy in trophies %} {% ifchanged trophy.date.year %}
             <li class="nav-item">
@@ -9,25 +9,32 @@
             {% endifchanged %} {% endfor %}
         </ul>
     </nav>
-    <div class="col-1"></div>
-    <div class="timeline__section offset-all col-8">
+    <div class="col-md-1"></div>
+    <div class="timeline__section offset-all col-md-8">
 
         {% for trophy in trophies %}
-        {% if trophy.winner %}
+       
         <div class="media team milestone {% ifchanged trophy.date.year %} new-year {% endifchanged %}" {% ifchanged trophy.date.year %} id="{{ trophy.date.year }}" {% endifchanged %}>
+                {% if trophy.winner %}
             <img src="{% static '/images/'|add:trophy.winner.logo %}" alt="Logo {{ trophy.winner.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
                 onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
             <div class="media-body">
                 <h4 class="mt-0">
                     <a href="{% url 'squadra' pk=trophy.winner.pk %}">{{ trophy.winner.name }}</a>
                 </h4>
+                {% else %}
+                <img src="{% static '/images/full/no-logo.jpg' %}" alt="No Logo" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center">
+                <div class="media-body">
+                    <h4 class="mt-0">
+                        ???
+                    </h4>
+        {% endif %}
                 <h5>
                     <a href="{% url 'competizione' pk=trophy.pk %}"> {{ trophy.name }} </a>
                 </h5>
             </div>
         </div>
-        {% else %}
-        {% endif %}
+                  
         {% endfor %}
 
     </div>

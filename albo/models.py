@@ -13,27 +13,19 @@ class Role(models.Model):
 
     def __str__(self):
         return self.role
-    
-    def position(self):
-        if self.role == 'Por':
-            return 1
-        elif self.role in ['Dc', 'Dd', 'Ds']:
-            return 2
-        elif self.role in ['M', 'C', 'E']:
-            return 3
-        elif self.role in ['T', 'W']:
-            return 4
-        elif self.role in ['A', 'Pc']:
-            return 5
 
 
 class Player(models.Model):
     name = models.CharField(max_length=50)
     teamirl = models.CharField(max_length=50)
     roles = models.ManyToManyField(Role)
+    toorder = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('toorder',)
 
 
 class Team(models.Model):
@@ -52,6 +44,7 @@ class Team(models.Model):
 class Competition(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateTimeField('date won', null=True)
+    comp_format = models.CharField(max_length=200, default='season')
     participants = models.ManyToManyField(User, related_name='participant')
     winner = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
 
@@ -64,7 +57,7 @@ class Bonus(models.Model):
     value = models.FloatField(null=True)
 
     def __str__(self):
-        return self.value
+        return self.name
 
 
 class Performance(models.Model):
@@ -96,7 +89,7 @@ class MatchRoster(models.Model):
         return self.team.name
 
     class Meta:
-        ordering = ('home',)
+        ordering = ('-home',)
 
 
 class Game(models.Model):
@@ -105,9 +98,33 @@ class Game(models.Model):
     teams = models.ManyToManyField(MatchRoster)
     matchday = models.IntegerField(null=True)
     pseudoid_game = models.CharField(max_length=100, null=True)
+    more_info = models.TextField(null=True)
 
     def __str__(self):
         return 'giornata {}'.format(self.pseudoid_game)
 
     class Meta:
         ordering = ('matchday',)
+
+
+class Position(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    wins = models.IntegerField(null=True)
+    losses = models.IntegerField(null=True)
+    draws = models.IntegerField(null=True)
+    played = models.IntegerField(null=True)
+    points = models.IntegerField(null=True)
+    goal_for = models.IntegerField(null=True)
+    goal_against = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ('points',)
+    
+
+class Standings(models.Model):
+    matchday = models.IntegerField(null=True)
+    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
+    positions = models.ManyToManyField(Position)
+
+    def __str__(self):
+        return 'classifica {}'.format(self.competition.name)

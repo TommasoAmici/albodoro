@@ -81,14 +81,20 @@
     list-style: none;
     list-style-position: inside;
 }
+
 .timeline__section {
     margin-bottom: 50px;
 }
+
 .timeline-body {
     position: relative;
-  }
+}
+
 .offset-all {
     margin-top: 50px;
+}
+.offset-table-game {
+    margin-top: 5%;
 }
 
 .offset-all-2 {
@@ -98,13 +104,34 @@
 .comp-trophy {
     max-height: 160px;
 }
+
 .game {
     width: 300px;
 }
+
 .game-text {
     width: 300px;
-    word-wrap: break-word;}
-    .blank_row
-    {
-        height: 10px !important; /* overwrites any other rules */
-        }
+    word-wrap: break-word;
+}
+
+.blank_row {
+    height: 10px !important;
+    /* overwrites any other rules */
+}
+
+.boxscore {
+    max-height: 100px;
+}
+
+.bonus-image {
+    max-height: 15px;
+    height: auto;
+    width: auto;
+}
+
+tr {
+    height: 40px;
+}
+div.squadra {
+    padding-top: 20px !important;
+}

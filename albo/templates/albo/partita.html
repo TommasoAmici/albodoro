@@ -1,0 +1,104 @@
+{% extends 'albo/base.html' %} {% load static %} {% block content %}
+<div class="main-content container offset-all-2">
+    <div class="row">
+        <div class="col-md-4 d-none d-md-flex">
+            {% if 'Serie A' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/seriea.png' %}"> {% elif 'Coppa delle Coppe' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/coppacoppe.png' %}"> {% elif 'Europa League' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/europa.png' %}"> {% elif 'Champions League' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/champions.png' %}"> {% elif 'La Liga' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/laliga.png' %}"> {% elif 'FA Cup' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/facup.png' %}"> {% elif 'Premier League' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/premier.png' %}"> {% elif 'Copa del Rey' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/copadelrey.png' %}"> {% elif 'Coppa Italia' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/coppaitalia.png' %}"> {% elif 'Ekstraklasa' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/ekstra.png' %}"> {% elif 'Intertoto' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/intertoto.png' %}"> {% elif 'Supercoppa' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/supercup.png' %}"> {% elif 'Papa' in game.competition.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/papajohns.png' %}"> {% endif %}
+        </div>
+        <div class="col-md-8 col-sm-12 text-center text-md-left">
+            <h1> {{ game.competition }} </h1>
+            <a href="{% url 'competizione' pk=game.competition.pk %}"><h4> {{ game.competition.date.year }} </h4></a>
+            <h5> Giornata {{ game.matchday }} </h5>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row offset-all align-items-center align-middle">
+        {% for t in game.teams.all %}
+        <div class='col-md-5 d-none d-md-inline'>
+            <div class="media team {% cycle '' 'justify-content-end' %}">
+                {% if forloop.counter == 2 %}
+                <h2 class="mt-0">
+                    <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
+                </h2>
+                {% endif %}
+                <img src="{% static '/images/'|add:t.team.logo %}" alt="Logo {{ t.team.name }}" class="{% cycle 'mr-3' 'ml-3' %} img-fluid rounded-circle team-logo-rose align-self-center"
+                    onerror="this.src='{% static '/images/full/no-logo.jpg' %}'"> {% if forloop.counter == 1 %}
+                <h2 class="mt-0">
+                    <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
+                </h2>
+                {% endif %}
+
+            </div>
+        </div>
+        {% if forloop.counter == 1 %}
+        <div class="col-md-2 col-sm-12 text-center boxscore">
+            <h1 class="align-self-center">{% for t in game.teams.all %}{{t.goals}}{% if forloop.counter == 1 %} - {% endif %}{% endfor %}</h1>
+            {% if game.more_info %}<p>{{ game.more_info }}</p>{% endif %}
+
+        </div>
+        {% endif %} {% endfor %}
+    </div>
+    <div class="row">
+        {% for t in game.teams.all %}
+        <div class='col-md-6 col-sm-12'>
+                <div class="d-md-none media team justify-content-center">
+                        <img src="{% static '/images/'|add:t.team.logo %}" alt="Logo {{ t.team.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
+                            onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+                        <h2 class="mt-0">
+                            <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
+                        </h2>
+        
+                </div>
+                <div>
+            <table class="table offset-table-game table-game">
+                <thead>
+                    <th></th>
+                    <th>Giocatore</th>
+                    <th>Voto</th>
+                    <th>Fantavoto</th>
+                </thead>
+                <tbody>
+                    {% for p in t.players.all %} {% if forloop.counter == 11 %}
+                    <tr>
+                        <th colspan="4">Panchina</th>
+                    </tr>
+                    {% endif %}
+                    <tr class='{% if p.bench %}table-secondary{% endif %}'>
+                        <th scope="row">
+                            {% for r in p.player.roles.all %}
+                            <span class="role text-center {{ r }}">{{ r }} </span>
+                            {% endfor %}
+                        </th>
+                        <td>
+                            {{p.player.name|title}} {% for b in p.bonus.all %} <img src="{% static 'images/bonus/'|add:b.name|cut:" "|add:'.png' %}" class='ml-2 bonus-image' style="max-height:18px; max-width:100%"> {% endfor %}
+                        </td>
+                        <td>
+                            {% if p.vote %} {{p.vote}} {% else %} - {% endif %}
+                        </td>
+                        <td>
+                            {% if p.fantavote %} {{p.fantavote}} {% else %} - {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
