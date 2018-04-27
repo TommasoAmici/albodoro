@@ -40,7 +40,10 @@ def comps_all(request):
 def comp_detail(request, pk):
     comp = get_object_or_404(Competition, pk=pk)
     m = Standings.objects.filter(competition=comp).aggregate(Max('matchday'))['matchday__max']
-    standings = Standings.objects.get(competition=comp, matchday=m)
+    try:
+        standings = Standings.objects.get(competition=comp, matchday=m)
+    except:
+        standings = []
     games = Game.objects.filter(competition=comp).order_by('matchday')
     comps_menu = Competition.objects.filter(date__year=datetime.now().year)
     return render(request, 'albo/comp.html', {'comp': comp, 'games': games, 'comps_menu': comps_menu, 'standings': standings})
