@@ -39,6 +39,41 @@
             {% endif %}
         </div>
     </div>
+    {% if standings %}
+    <table class="table offset-all table-hover table-responsive-sm">
+        <thead>
+            <th scope="col">Posizione</th>
+            <th scope='col'>Squadra</th>
+            <th scope='col'>G</th>
+            <th scope='col'>V</th>
+            <th scope='col'>P</th>
+            <th scope='col'>S</th>
+            <th scope='col'>GF</th>
+            <th scope='col'>GS</th>
+            <th scope='col'>GD</th>            
+            <th scope='col'>Fantapunti</th>
+            <th scope='col'>Punti</th>
+        </thead>
+        <tbody>
+            
+            {% for pos in standings.positions.all %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td><a href="{% url 'squadra' pk=pos.team.pk %}">{{ pos.team.name }}</a></td>
+                    <td>{{pos.played}}</td>
+                    <td>{{pos.wins}}</td>
+                    <td>{{pos.draws}}</td>
+                    <td>{{pos.losses}}</td>
+                    <td>{{pos.goal_for}}</td>
+                    <td>{{pos.goal_against}}</td>
+                    <td>{{pos.goal_diff}}</td>
+                    <td>{{pos.fantapunti}}</td>
+                    <td>{{pos.points}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
     {% if games %}
     <table class="table offset-all table-hover">
         <thead>

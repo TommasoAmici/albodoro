@@ -109,16 +109,20 @@ class Game(models.Model):
 
 class Position(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    wins = models.IntegerField(null=True)
-    losses = models.IntegerField(null=True)
-    draws = models.IntegerField(null=True)
-    played = models.IntegerField(null=True)
-    points = models.IntegerField(null=True)
-    goal_for = models.IntegerField(null=True)
-    goal_against = models.IntegerField(null=True)
+    competition = models.ForeignKey(Competition, on_delete=models.CASCADE, null=True)
+    matchday = models.IntegerField(null=True)
+    wins = models.IntegerField(null=True, default=0)
+    losses = models.IntegerField(null=True, default=0)
+    draws = models.IntegerField(null=True, default=0)
+    played = models.IntegerField(null=True, default=0)
+    points = models.IntegerField(null=True, default=0)
+    fantapunti = models.IntegerField(null=True, default=0)
+    goal_for = models.IntegerField(null=True, default=0)
+    goal_against = models.IntegerField(null=True, default=0)
+    goal_diff = models.IntegerField(null=True, default=0)
 
     class Meta:
-        ordering = ('points',)
+        ordering = ('-points',)
     
 
 class Standings(models.Model):

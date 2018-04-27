@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from albo.models import Team, Player, Competition, Game
+from django.db.models import Max
+from albo.models import Team, Player, Competition, Game, Standings
 from datetime import datetime
 
 # Create your views here.
@@ -38,6 +39,8 @@ def comps_all(request):
 
 def comp_detail(request, pk):
     comp = get_object_or_404(Competition, pk=pk)
+    m = Standings.objects.filter(competition=comp).aggregate(Max('matchday'))['matchday__max']
+    standings = Standings.objects.get(competition=comp, matchday=m)
     games = Game.objects.filter(competition=comp).order_by('matchday')
     comps_menu = Competition.objects.filter(date__year=datetime.now().year)
-    return render(request, 'albo/comp.html', {'comp': comp, 'games': games, 'comps_menu': comps_menu})
+    return render(request, 'albo/comp.html', {'comp': comp, 'games': games, 'comps_menu': comps_menu, 'standings': standings})
