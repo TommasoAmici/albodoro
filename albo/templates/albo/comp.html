@@ -24,7 +24,9 @@
         <div class="col-md-2 text-center text-md-left"></div>
         <div class="col-md-4 text-center text-md-left mt-3 mt-md-0">
             {% if comp.winner %}
-            <div><h1>Vincitore</h1></div>
+            <div>
+                <h1>Vincitore</h1>
+            </div>
             <div class="media d-block d-md-flex">
                 <img src="{% static '/images/'|add:comp.winner.logo %}" alt="Logo {{ comp.winner.name }}" class="mr-0 mr-md-3 img-fluid rounded-circle team-logo-rose align-self-center"
                     onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
@@ -40,7 +42,8 @@
         </div>
     </div>
     {% if standings %}
-    <table class="table offset-all table-hover table-responsive-sm">
+    <h3 class="offset-all">Classifica</h3>
+    <table class="table table-hover table-responsive-sm">
         <thead>
             <th scope="col">Posizione</th>
             <th scope='col'>Squadra</th>
@@ -50,32 +53,35 @@
             <th scope='col'>S</th>
             <th scope='col'>GF</th>
             <th scope='col'>GS</th>
-            <th scope='col'>GD</th>            
+            <th scope='col'>GD</th>
             <th scope='col'>Fantapunti</th>
             <th scope='col'>Punti</th>
         </thead>
         <tbody>
-            
+
             {% for pos in standings.positions.all %}
-                <tr>
-                    <th>{{ forloop.counter }}</th>
-                    <td><a href="{% url 'squadra' pk=pos.team.pk %}">{{ pos.team.name }}</a></td>
-                    <td>{{pos.played}}</td>
-                    <td>{{pos.wins}}</td>
-                    <td>{{pos.draws}}</td>
-                    <td>{{pos.losses}}</td>
-                    <td>{{pos.goal_for}}</td>
-                    <td>{{pos.goal_against}}</td>
-                    <td>{{pos.goal_diff}}</td>
-                    <td>{{pos.fantapunti}}</td>
-                    <td>{{pos.points}}</td>
-                </tr>
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>
+                    <a href="{% url 'squadra' pk=pos.team.pk %}">{{ pos.team.name }}</a>
+                </td>
+                <td>{{pos.played}}</td>
+                <td>{{pos.wins}}</td>
+                <td>{{pos.draws}}</td>
+                <td>{{pos.losses}}</td>
+                <td>{{pos.goal_for}}</td>
+                <td>{{pos.goal_against}}</td>
+                <td>{{pos.goal_diff}}</td>
+                <td>{{pos.fantapunti}}</td>
+                <td>{{pos.points}}</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
     {% endif %}
     {% if games %}
-    <table class="table offset-all table-hover">
+    <h3 class="offset-all">Partite</h3>
+    <table class="table table-hover">
         <thead>
             <th scope="col">Giornata</th>
             <th scope='col'>Squadra di casa</th>
@@ -83,7 +89,7 @@
             <th scope='col'>Squadra fuori casa</th>
         </thead>
         <tbody>
-            
+
             {% for game in games %}
 
             <tr class='game'>
@@ -93,7 +99,8 @@
                     <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
                 </td>
                 {% endif %} {% endfor %}
-                <td class='text-center'><a href="{% url 'partita' pk=game.pk %}">{% for t in game.teams.all %}{{t.goals}}{% if forloop.first %} - {% endif %}{% endfor %}</td>
+                <td class='text-center'>
+                    <a href="{% url 'partita' pk=game.pk %}">{% for t in game.teams.all %}{{t.goals}}{% if forloop.first %} - {% endif %}{% endfor %}</td>
                 {% for t in game.teams.all %} {% if t.home == 0 %}</a>
                 <td>
                     <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
