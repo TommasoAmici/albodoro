@@ -129,6 +129,10 @@
     width: auto;
 }
 
+.table-bench {
+    opacity: 0.7 !important;
+}
+
 tr {
     height: 40px;
 }
