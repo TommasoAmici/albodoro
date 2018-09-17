@@ -15,7 +15,10 @@
             <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/ekstra.png' %}"> {% elif 'Intertoto' in comp.name %}
             <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/intertoto.png' %}"> {% elif 'Supercoppa' in comp.name %}
             <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/supercup.png' %}"> {% elif 'Papa' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/papajohns.png' %}"> {% endif %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/papajohns.png' %}"> {% elif 'Classic' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/classic.png' %}"> {% elif 'Mondiali' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/mondiali.png' %}"> {% elif 'Ranking' in comp.name %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/ranking.png' %}"> {% endif %}
         </div>
         <div class="col-md-4 text-center text-md-left">
             <h1> {{ comp }} </h1>
@@ -78,8 +81,7 @@
             {% endfor %}
         </tbody>
     </table>
-    {% endif %}
-    {% if games %}
+    {% endif %} {% if games %}
     <h3 class="offset-all">Partite</h3>
     <table class="table table-hover">
         <thead>

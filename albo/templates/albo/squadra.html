@@ -2,7 +2,8 @@
 <div class="container main-content offset-all">
     <div class="row">
         <div class="team col-md-4 col-sm-12 text-center text-md-left">
-                <img src="{% static '/images/'|add:team.logo %}" alt="Logo {{ team.name }}" class="img-fluid rounded-circle team-logo" onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+            <img src="{% static '/images/'|add:team.logo %}" alt="Logo {{ team.name }}" class="img-fluid rounded-circle team-logo"
+                onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
         </div>
         <div class="col-md-8 col-sm-12 text-center text-md-left squadra">
             <div class="">
@@ -16,35 +17,23 @@
             </p>
             {% for trophy in trophies %}
             <a href={% url 'competizione' pk=trophy.pk %}>
-            <img class='trophy'     
-            {% if 'Serie A' in trophy.name%}
-                src="{% static '/images/trophies/seriea.png' %}"
-                {% elif 'Coppa delle Coppe' in trophy.name%}
-                src="{% static '/images/trophies/coppacoppe.png' %}"
-                {% elif 'Europa League' in trophy.name%}
-                src="{% static '/images/trophies/europa.png' %}"
-                {% elif 'Champions League' in trophy.name%}
-                src="{% static '/images/trophies/champions.png' %}"
-                {% elif 'La Liga' in trophy.name%}
-                src="{% static '/images/trophies/laliga.png' %}"
-                {% elif 'FA Cup' in trophy.name%}
-                src="{% static '/images/trophies/facup.png' %}"
-                {% elif 'Premier League' in trophy.name%}
-                src="{% static '/images/trophies/premier.png' %}"
-                {% elif 'Copa del Rey' in trophy.name%}
-                src="{% static '/images/trophies/copadelrey.png' %}"
-                {% elif 'Coppa Italia' in trophy.name%}
-                src="{% static '/images/trophies/coppaitalia.png' %}"
-                {% elif 'Ekstraklasa' in trophy.name%}
-                src="{% static '/images/trophies/ekstra.png' %}"
-                {% elif 'Intertoto' in trophy.name%}
-                src="{% static '/images/trophies/intertoto.png' %}"
-                {% elif 'Supercoppa' in trophy.name%}
-                src="{% static '/images/trophies/supercup.png' %}"
-                {% elif 'Papa' in trophy.name%}
-                src="{% static '/images/trophies/papajohns.png' %}"
-                {% endif %}
-                data-toggle="tooltip" data-placement="bottom" title="{{ trophy.name }}"></a>
+                <img class='trophy' {% if 'Serie A' in trophy.name%} src="{% static '/images/trophies/seriea.png' %}"
+                    {% elif 'Coppa delle Coppe' in trophy.name%} src="{% static '/images/trophies/coppacoppe.png' %}"
+                    {% elif 'Europa League' in trophy.name%} src="{% static '/images/trophies/europa.png' %}" {% elif
+                    'Champions League' in trophy.name%} src="{% static '/images/trophies/champions.png' %}" {% elif
+                    'La Liga' in trophy.name%} src="{% static '/images/trophies/laliga.png' %}" {% elif 'FA Cup' in
+                    trophy.name%} src="{% static '/images/trophies/facup.png' %}" {% elif 'Premier League' in
+                    trophy.name%} src="{% static '/images/trophies/premier.png' %}" {% elif 'Copa del Rey' in
+                    trophy.name%} src="{% static '/images/trophies/copadelrey.png' %}" {% elif 'Coppa Italia' in
+                    trophy.name%} src="{% static '/images/trophies/coppaitalia.png' %}" {% elif 'Ekstraklasa' in
+                    trophy.name%} src="{% static '/images/trophies/ekstra.png' %}" {% elif 'Intertoto' in trophy.name%}
+                    src="{% static '/images/trophies/intertoto.png' %}" {% elif 'Supercoppa' in trophy.name%} src="{% static '/images/trophies/supercup.png' %}"
+                    {% elif 'Papa' in trophy.name%} src="{% static '/images/trophies/papajohns.png' %}" {% elif
+                    'Classic' in trophy.name %} src="{% static '/images/trophies/classic.png' %}" {% elif 'Mondiali' in
+                    trophy.name %} src="{% static '/images/trophies/mondiali.png' %}" {% elif 'Ranking' in trophy.name
+                    %} src="{% static '/images/trophies/ranking.png' %}" {% endif %} data-toggle="tooltip"
+                    data-placement="bottom" title="{{ trophy.name }}">
+            </a>
             {% endfor %}
         </div>
     </div>
