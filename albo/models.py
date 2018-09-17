@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 class User(models.Model):
@@ -40,6 +41,8 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+    def slug(self):
+        return slugify(self.owner)
 
 class Competition(models.Model):
     name = models.CharField(max_length=200)
@@ -49,8 +52,10 @@ class Competition(models.Model):
     winner = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name.split(' -')[0]
+        return self.name.split(" -")[0]
 
+    def slug(self):
+        return slugify(self.name)
 
 class Bonus(models.Model):
     name = models.CharField(max_length=200)
