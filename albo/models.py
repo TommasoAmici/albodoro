@@ -26,12 +26,12 @@ class Player(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('toorder',)
+        ordering = ("toorder",)
 
 
 class Team(models.Model):
     name = models.CharField(max_length=200)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='team')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="team")
     history = models.TextField(blank=True)
     yearroster = models.ManyToManyField(Player)
     logo = models.TextField(null=True)
@@ -44,11 +44,12 @@ class Team(models.Model):
     def slug(self):
         return slugify(self.owner)
 
+
 class Competition(models.Model):
     name = models.CharField(max_length=200)
-    date = models.DateTimeField('date won', null=True)
-    comp_format = models.CharField(max_length=200, default='season')
-    participants = models.ManyToManyField(User, related_name='participant')
+    date = models.DateTimeField("date won", null=True)
+    comp_format = models.CharField(max_length=200, default="season")
+    participants = models.ManyToManyField(User, related_name="participant")
     winner = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -56,6 +57,7 @@ class Competition(models.Model):
 
     def slug(self):
         return slugify(self.name)
+
 
 class Bonus(models.Model):
     name = models.CharField(max_length=200)
@@ -70,6 +72,7 @@ class Performance(models.Model):
     vote = models.FloatField(null=True)
     fantavote = models.FloatField(null=True)
     bench = models.IntegerField(null=True)
+    bench_fg = models.IntegerField(null=True)
     malus = models.IntegerField(null=True)
     bonus = models.ManyToManyField(Bonus)
     matchday = models.IntegerField(null=True)
@@ -81,7 +84,7 @@ class Performance(models.Model):
 
 class MatchRoster(models.Model):
     players = models.ManyToManyField(Performance)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_main')
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team_main")
     home = models.IntegerField(null=True)
     formation = models.CharField(max_length=4, null=True)
     formation_applied = models.CharField(max_length=4, null=True)
@@ -94,22 +97,22 @@ class MatchRoster(models.Model):
         return self.team.name
 
     class Meta:
-        ordering = ('-home',)
+        ordering = ("-home",)
 
 
 class Game(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
-    date = models.DateTimeField('date played', null=True)
+    date = models.DateTimeField("date played", null=True)
     teams = models.ManyToManyField(MatchRoster)
     matchday = models.IntegerField(null=True)
     pseudoid_game = models.CharField(max_length=100, null=True)
     more_info = models.TextField(null=True)
 
     def __str__(self):
-        return 'giornata {}'.format(self.pseudoid_game)
+        return "giornata {}".format(self.pseudoid_game)
 
     class Meta:
-        ordering = ('matchday',)
+        ordering = ("matchday",)
 
 
 class Position(models.Model):
@@ -127,8 +130,8 @@ class Position(models.Model):
     goal_diff = models.IntegerField(null=True, default=0)
 
     class Meta:
-        ordering = ('-points',)
-    
+        ordering = ("-points", "-fantapunti")
+
 
 class Standings(models.Model):
     matchday = models.IntegerField(null=True)
@@ -136,4 +139,4 @@ class Standings(models.Model):
     positions = models.ManyToManyField(Position)
 
     def __str__(self):
-        return 'classifica {}'.format(self.competition.name)
+        return "classifica {}".format(self.competition.name)
