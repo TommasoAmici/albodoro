@@ -13,11 +13,14 @@
     <div class="timeline__section offset-all col-md-8">
 
         {% for trophy in trophies %}
-       
-        <div class="media team milestone {% ifchanged trophy.date.year %} new-year {% endifchanged %}" {% ifchanged trophy.date.year %} id="{{ trophy.date.year }}" {% endifchanged %}>
-                {% if trophy.winner %}
-            <img src="{% static '/images/'|add:trophy.winner.logo %}" alt="Logo {{ trophy.winner.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
-                onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+
+        <div class="media team milestone
+        {% ifchanged trophy.date.year %}
+        new-year
+        {% endifchanged %}"
+            {% ifchanged trophy.date.year %} id="{{ trophy.date.year }}" {% endifchanged %}>
+            {% if trophy.winner %}
+            <img src="{{trophy.winner.logo.url}}" alt="Logo {{ trophy.winner.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center">
             <div class="media-body">
                 <h4 class="mt-0">
                     <a href="{% url 'squadra' pk=trophy.winner.pk %}">{{ trophy.winner.name }}</a>

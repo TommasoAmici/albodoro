@@ -34,7 +34,9 @@ class Team(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="team")
     history = models.TextField(blank=True)
     yearroster = models.ManyToManyField(Player)
-    logo = models.TextField(null=True)
+    logo = models.ImageField(
+        upload_to="team_logos/", default="team_logos/no-logo.png", null=True
+    )
     jersey = models.TextField(null=True)
     stadium = models.TextField(null=True)
 

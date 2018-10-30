@@ -22,8 +22,8 @@
                     <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
                 </h2>
                 {% endif %}
-                <img src="{% static '/images/'|add:t.team.logo %}" alt="Logo {{ t.team.name }}" class="{% cycle 'mr-3' 'ml-3' %} img-fluid rounded-circle team-logo-rose align-self-center"
-                    onerror="this.src='{% static '/images/full/no-logo.jpg' %}'"> {% if forloop.counter == 1 %}
+                <img src="{{t.team.logo.url}}" alt="Logo {{ t.team.name }}" class="{% cycle 'mr-3' 'ml-3' %} img-fluid rounded-circle team-logo-rose align-self-center">
+                {% if forloop.counter == 1 %}
                 <h2 class="mt-0">
                     <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
                 </h2>
@@ -44,8 +44,7 @@
         {% for t in game.teams.all %}
         <div class='col-md-6 col-sm-12'>
             <div class="d-md-none media team justify-content-center">
-                <img src="{% static '/images/'|add:t.team.logo %}" alt="Logo {{ t.team.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center"
-                    onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+                <img src="{{t.team.logo.url}}" alt="Logo {{ t.team.name }}" class="mr-3 img-fluid rounded-circle team-logo-rose align-self-center">
                 <h2 class="mt-0">
                     <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>
                 </h2>

@@ -2,8 +2,7 @@
 <div class="container main-content offset-all">
     <div class="row">
         <div class="team col-md-4 col-sm-12 text-center text-md-left">
-            <img src="{% static '/images/'|add:team.logo %}" alt="Logo {{ team.name }}" class="img-fluid rounded-circle team-logo"
-                onerror="this.src='{% static '/images/full/no-logo.jpg' %}'">
+            <img src="{{team.logo.url}}" alt="Logo {{ team.name }}" class="img-fluid rounded-circle team-logo">
         </div>
         <div class="col-md-8 col-sm-12 text-center text-md-left squadra">
             <div class="">
