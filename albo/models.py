@@ -33,12 +33,12 @@ class Team(models.Model):
     name = models.CharField(max_length=200)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="team")
     history = models.TextField(blank=True)
-    yearroster = models.ManyToManyField(Player)
+    yearroster = models.ManyToManyField(Player, blank=True)
     logo = models.ImageField(
         upload_to="team_logos/", default="team_logos/no-logo.png", null=True
     )
-    jersey = models.TextField(null=True)
-    stadium = models.TextField(null=True)
+    jersey = models.TextField(null=True, blank=True)
+    stadium = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -50,8 +50,8 @@ class Team(models.Model):
 class Competition(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateTimeField("date won", null=True)
-    comp_format = models.CharField(max_length=200, default="season")
-    participants = models.ManyToManyField(User, related_name="participant")
+    comp_format = models.CharField(max_length=200, default="season", blank=True)
+    participants = models.ManyToManyField(User, related_name="participant", blank=True)
     winner = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
     img = models.ImageField(upload_to="trophies/", null=True)
 
