@@ -51,6 +51,7 @@ class Competition(models.Model):
     comp_format = models.CharField(max_length=200, default="season")
     participants = models.ManyToManyField(User, related_name="participant")
     winner = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
+    img = models.ImageField(upload_to="trophies/", null=True)
 
     def __str__(self):
         return self.name.split(" -")[0]

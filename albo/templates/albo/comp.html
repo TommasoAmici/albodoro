@@ -2,23 +2,7 @@
 <div class="main-content container offset-all-2">
     <div class="row">
         <div class="col-md-2 text-center text-md-left">
-            {% if 'Serie A' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/seriea.png' %}"> {% elif 'Coppa delle Coppe' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/coppacoppe.png' %}"> {% elif 'Europa League' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/europa.png' %}"> {% elif 'Champions League' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/champions.png' %}"> {% elif 'La Liga' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/laliga.png' %}"> {% elif 'FA Cup' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/facup.png' %}"> {% elif 'Premier League' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/premier.png' %}"> {% elif 'Copa del Rey' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/copadelrey.png' %}"> {% elif 'Coppa Italia' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/coppaitalia.png' %}"> {% elif 'Ekstraklasa' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/ekstra.png' %}"> {% elif 'Intertoto' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/intertoto.png' %}"> {% elif 'Supercoppa' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/supercup.png' %}"> {% elif 'Papa' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/papajohns.png' %}"> {% elif 'Classic' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/classic.png' %}"> {% elif 'Mondiali' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/mondiali.png' %}"> {% elif 'Ranking' in comp.name %}
-            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{% static '/images/trophies/ranking.png' %}"> {% endif %}
+            <img class='mr-3 img-fluid align-self-end comp-trophy' src="{{comp.img.url}}">
         </div>
         <div class="col-md-4 text-center text-md-left">
             <h1> {{ comp }} </h1>
