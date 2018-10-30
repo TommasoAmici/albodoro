@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from .sensitive import *
+from .sensitive import secret_key, allowed_hosts, postgres_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +26,7 @@ SECRET_KEY = secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [host_addr]
+ALLOWED_HOSTS = allowed_hosts
 
 
 # Application definition
@@ -76,17 +76,13 @@ WSGI_APPLICATION = 'albodoro.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-    'default': {
-    	'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'albodoro',
-    	'USER': 'albouser',
-        'PASSWORD': 'N5pK9ayjX^n&&!Pv83I^N',
-    	'HOST': 'localhost',
-    	'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": postgres_settings.name,
+        "USER": postgres_settings.user,
+        "PASSWORD": postgres_settings.password,
+        "HOST": postgres_settings.host,
+        "PORT": postgres_settings.port,
     }
 }
 
