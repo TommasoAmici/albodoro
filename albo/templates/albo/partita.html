@@ -33,7 +33,8 @@
         </div>
         {% if forloop.counter == 1 %}
         <div class="col-md-2 col-sm-12 text-center boxscore">
-            <h1 class="align-self-center">{% for t in game.teams.all %}{{t.goals}}{% if forloop.counter == 1 %} - {% endif %}{% endfor %}</h1>
+            <h1 class="align-self-center">{% for t in game.teams.all %}{{t.goals}}{% if forloop.counter == 1 %} - {%
+                endif %}{% endfor %}</h1>
             {% if game.more_info %}
             <p>{{ game.more_info }}</p>{% endif %}
 
@@ -84,8 +85,8 @@
                             </th>
                             <td>
                                 {{p.player.name|title}} {% for b in p.bonus.all %}
-                                <img src="{% static 'images/bonus/'|add:b.name|cut:"
-                                    "|add:'.png' %}" class='ml-2 bonus-image' style="max-height:18px; max-width:100%"> {% endfor %}
+                                <img src="{% static 'images/bonus/'|add:b.name|cut:" "|add:'.png' %}" class='ml-2 bonus-image'
+                                    style="max-height:18px; max-width:100%"> {% endfor %}
                             </td>
                             <td>
                                 {% if p.vote %} {{p.vote}} {% else %} - {% endif %}

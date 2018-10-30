@@ -85,7 +85,8 @@
                 </td>
                 {% endif %} {% endfor %}
                 <td class='text-center'>
-                    <a href="{% url 'partita' pk=game.pk %}">{% for t in game.teams.all %}{{t.goals}}{% if forloop.first %} - {% endif %}{% endfor %}</td>
+                    <a href="{% url 'partita' pk=game.pk %}">{% for t in game.teams.all %}{{t.goals}}{% if
+                        forloop.first %} - {% endif %}{% endfor %}</td>
                 {% for t in game.teams.all %} {% if t.home == 0 %}</a>
                 <td>
                     <a href="{% url 'squadra' pk=t.team.pk %}">{{ t.team.name }}</a>

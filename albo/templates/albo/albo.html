@@ -31,15 +31,15 @@
                     <h4 class="mt-0">
                         ???
                     </h4>
-        {% endif %}
-                <h5>
-                    <a href="{% url 'competizione' pk=trophy.pk %}"> {{ trophy.name }} </a>
-                </h5>
+                    {% endif %}
+                    <h5>
+                        <a href="{% url 'competizione' pk=trophy.pk %}"> {{ trophy.name }} </a>
+                    </h5>
+                </div>
             </div>
-        </div>
-                  
-        {% endfor %}
 
+            {% endfor %}
+
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
